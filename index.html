@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMW Graphics Wizard</title>
+    <script src="index.js"></script>
+    <script src="GFXWizard.js"></script>
+    <script src="SNESTileViewer.js"></script>
+</head>
+<body>
+    <!-- INTRO TEXT -->
+    <h1 id="intro">SMW Graphics Wizard</h1>
+    <hr>
+    <P>Welcome! The purpose of this website is to help you recreate SMW graphics!</P>
+    <P>Use the Graphics Wizard to begin!</P>
+    <P><span class="Warning">Warning this site is constantly being updated with new GFX! it takes some time for me to create a new page so please be patient! Also, I am not sure what some Graphics are used for inside the files so anything with a is something I don't know.</span></P>
+    <p>Website created by: MVXgameS</p>
+
+    <!-- INPUT PASSWORD FOR BOWSERS CASTLE PROJECT-->
+     <form onsubmit="checkPassword()">
+        <div>
+            <label for="bcPass">Password</label>
+            <input type="password" id="bcPass" name="bcPass" maxlength="6">
+        </div>
+        <br>
+        <div>
+            <input type="submit" name="submit" value="Submit">
+        </div>
+     </form>
+
+    <!-- BUTTONS -->
+    <br><hr><br>
+    <div>
+        <button onclick = "GFXWizard(0)">GFX00</button>
+    </div>
+    <p id = "GFX00"></p>
+    <canvas id="tileCanvas" width="0" height="0"></canvas>
+    <div>
+        <button onclick = "GFXWizard(1)">GFX01</button>
+    </div>
+    <p id = "GFX01"></p>
+    <div>
+        <button onclick = "GFXWizard(2)">GFX02</button>
+    </div>
+    <p id = "GFX02"></p>
+    <div>
+        <button onclick = "GFXWizard(3)">GFX03</button>
+    </div>
+    <p id = "GFX03"></p>
+    <div>
+        <button onclick = "GFXWizard(4)">GFX04</button>
+    </div>
+    <p id = "GFX04"></p>
+    <div>
+        <button onclick = "GFXWizard(5)">GFX05</button>
+    </div>
+    <p id = "GFX05"></p>
+    <div>
+        <button onclick = "GFXWizard(6)">GFX06</button>
+    </div>
+    <p id = "GFX06"></p>
+    <div>
+        <button onclick = "GFXWizard(7)">GFX07</button>
+    </div>
+    <p id = "GFX07"></p>
+    <div>
+        <button onclick = "GFXWizard(8)">GFX08</button>
+    </div>
+    <p id = "GFX08"></p>
+    <div>
+        <button onclick = "GFXWizard(9)">GFX09</button>
+    </div>
+    <p id = "GFX09"></p>
+    <div>
+        <button onclick = "GFXWizard(10)">GFX0A</button>
+    </div>
+    <p id = "GFX0A"></p>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SNES Tile Viewer</title>
+  <style>
+    body { font-family: sans-serif; background: #222; color: white; padding: 20px; }
+    canvas { background: #000; border: 1px solid #666; image-rendering: pixelated; display: block; margin-top: 10px; }
+    #paletteDisplay div { display: inline-block; width: 32px; height: 32px; margin: 4px; border: 1px solid #aaa; }
+    .hex { font-size: 10px; text-align: center; color: #ccc; margin-top: 2px; }
+  </style>
+</head>
+<body>
+
+  <h1>SNES .bin Tile Viewer</h1>
+
+  <label>Choose GFX preset:</label>
+  <select id="gfxPreset"></select>
+
+  <label>Choose Palette preset:</label>
+  <select id="palettePreset"></select>
+
+  <canvas id="tileCanvas" width="512" height="512"></canvas>
+
+  <h2>Current Palette</h2>
+  <div id="paletteDisplay"></div>
+
+  <script src="SNESTileViewer.js"></script>
+
+</body>
+</html>
