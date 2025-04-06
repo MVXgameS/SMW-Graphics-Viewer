@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SMW Graphics Wizard</title>
     <script src="index.js"></script>
-    <script src="GFXWizard.js"></script>
-    <script src="SNESTileViewer.js"></script>
 </head>
 <body>
     <!-- INTRO TEXT -->
@@ -30,52 +28,44 @@
         </div>
      </form>
 
-    <!-- BUTTONS -->
+    <!-- GFX Wizard -->
     <br><hr><br>
+
     <div>
-        <button onclick = "GFXWizard(0)">GFX00</button>
+        <canvas id="tileCanvas" width="512" height="288"></canvas>
     </div>
-    <p id = "GFX00"></p>
-    <canvas id="tileCanvas" width="0" height="0"></canvas>
-    <div>
-        <button onclick = "GFXWizard(1)">GFX01</button>
-    </div>
-    <p id = "GFX01"></p>
-    <div>
-        <button onclick = "GFXWizard(2)">GFX02</button>
-    </div>
-    <p id = "GFX02"></p>
-    <div>
-        <button onclick = "GFXWizard(3)">GFX03</button>
-    </div>
-    <p id = "GFX03"></p>
-    <div>
-        <button onclick = "GFXWizard(4)">GFX04</button>
-    </div>
-    <p id = "GFX04"></p>
-    <div>
-        <button onclick = "GFXWizard(5)">GFX05</button>
-    </div>
-    <p id = "GFX05"></p>
-    <div>
-        <button onclick = "GFXWizard(6)">GFX06</button>
-    </div>
-    <p id = "GFX06"></p>
-    <div>
-        <button onclick = "GFXWizard(7)">GFX07</button>
-    </div>
-    <p id = "GFX07"></p>
-    <div>
-        <button onclick = "GFXWizard(8)">GFX08</button>
-    </div>
-    <p id = "GFX08"></p>
-    <div>
-        <button onclick = "GFXWizard(9)">GFX09</button>
-    </div>
-    <p id = "GFX09"></p>
-    <div>
-        <button onclick = "GFXWizard(10)">GFX0A</button>
-    </div>
-    <p id = "GFX0A"></p>
+    
+    <label>Choose GFX:</label>
+    <select id="gfxPreset"></select>
+  
+    <label>Choose Palette:</label>
+    <select id="paletteOffsetSelect">
+        <option value="0">Palette 0</option>
+        <option value="1">Palette 1</option>
+        <option value="2">Palette 2</option>
+        <option value="3">Palette 3</option>
+        <option value="4">Palette 4</option>
+        <option value="5">Palette 5</option>
+        <option value="6">Palette 6</option>
+        <option value="7">Palette 7</option>
+        <option value="8">Palette 8</option>
+        <option value="9">Palette 9</option>
+        <option value="10">Palette A</option>
+        <option value="11">Palette B</option>
+        <option value="12">Palette C</option>
+        <option value="13">Palette D</option>
+        <option value="14">Palette E</option>
+        <option value="15">Palette F</option>
+    </select>
+
+    <label>Set Type:</label>
+    <select id="palettePreset"></select>
+    
+    <!-- For Hex Codes -->
+    <h2>Current Palette</h2>
+    <div id="paletteDisplay"></div>
+  
+    <script src="SNESTileViewer.js"></script>
+
 </body>
 </html>
