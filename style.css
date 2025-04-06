@@ -1,3 +1,39 @@
 .Warning {
     color: red;
 }
+
+/* Container for the canvas and grid */
+.canvas-container {
+    position: relative;
+    width: 512px;  /* Adjust based on your canvas size */
+    height: 288px; /* Adjust based on your canvas size */
+  }
+  
+  /* Canvas for the tiles */
+  #tileCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;  /* Ensure the tile canvas is behind the grid */
+  }
+  
+  /* Grid overlay */
+  #gridCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;  /* Ensure the grid is on top of the tile canvas */
+  }
+  
+  /* For click detection*/
+  #clickCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;  /* Ensure the click canvas is above everything */
+  }
+  
+  /* Zoom canvas, if applicable */
+  #zoomCanvas {
+    position: relative;
+  }

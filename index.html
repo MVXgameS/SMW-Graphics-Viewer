@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SMW Graphics Wizard</title>
-    <script src="index.js"></script>
 </head>
 <body>
     <!-- INTRO TEXT -->
@@ -13,28 +12,24 @@
     <hr>
     <P>Welcome! The purpose of this website is to help you recreate SMW graphics!</P>
     <P>Use the Graphics Wizard to begin!</P>
-    <P><span class="Warning">Warning this site is constantly being updated with new GFX! it takes some time for me to create a new page so please be patient! Also, I am not sure what some Graphics are used for inside the files so anything with a is something I don't know.</span></P>
+    <P><span class="Warning">Warning this site is constantly being updated with new GFX! it takes for me to create descriptions for everything! Also, I am not sure what some Graphics are used for inside the files so anything with a ? is something I don't know.</span></P>
+    <P><span class="Warning">GFX27-GFX2B is glitched graphics at the moment, I'm working on a feature to fix this for the future.</span></P>
     <p>Website created by: MVXgameS</p>
 
-    <!-- INPUT PASSWORD FOR BOWSERS CASTLE PROJECT-->
-     <form onsubmit="checkPassword()">
-        <div>
-            <label for="bcPass">Password</label>
-            <input type="password" id="bcPass" name="bcPass" maxlength="6">
-        </div>
-        <br>
-        <div>
-            <input type="submit" name="submit" value="Submit">
-        </div>
-     </form>
-
     <!-- GFX Wizard -->
-    <br><hr><br>
+    <hr><br>
+
+    <!-- class="canvas-container" -->
+    <div class="canvas-container">
+        <canvas id="tileCanvas" width="512" height="288"></canvas>
+        <canvas id="gridCanvas" width="512" height="288"></canvas>
+        <canvas id="clickCanvas" width="512" height="288"></canvas>
+    </div>
 
     <div>
-        <canvas id="tileCanvas" width="512" height="288"></canvas>
+        <canvas id="zoomCanvas" width="256" height="256"></canvas>
     </div>
-    
+
     <label>Choose GFX:</label>
     <select id="gfxPreset"></select>
   
@@ -60,12 +55,13 @@
 
     <label>Set Type:</label>
     <select id="palettePreset"></select>
+
+    <!-- Descriptions -->
+    <div id="tileInfo" style="margin-top: 10px; font-weight: bold;"></div>
     
     <!-- For Hex Codes -->
     <h2>Current Palette</h2>
     <div id="paletteDisplay"></div>
-  
-    <script src="SNESTileViewer.js"></script>
 
-</body>
-</html>
+    <script src="tileDescriptions.js"></script>
+    <script src="SNESTileViewer.js"></script>

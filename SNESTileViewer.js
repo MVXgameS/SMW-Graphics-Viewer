@@ -1,5 +1,7 @@
 const canvas = document.getElementById('tileCanvas');
 const ctx = canvas.getContext('2d');
+const gridCanvas = document.getElementById('gridCanvas');
+const gridCtx = gridCanvas.getContext('2d');
 const SCALE = 4;
 const TILE_SIZE = 8;
 const TILE_BYTES = 32;
@@ -7,24 +9,67 @@ const TILES_PER_ROW = canvas.width / (TILE_SIZE * SCALE);
 
 // Presets
 const gfxPresets = [
-  { name: "GFX00", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX00.bin" },
+  { name: "GFX00", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/61f2f7651b0663e279f132f402b2839dbd0d11c3/Graphics/GFX00.bin" },
   { name: "GFX01", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX01.bin" },
   { name: "GFX02", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX02.bin" },
   { name: "GFX03", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX03.bin" },
   { name: "GFX04", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX04.bin" },
   { name: "GFX05", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX05.bin" },
   { name: "GFX06", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX06.bin" },
+  { name: "GFX07", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX07.bin" },
+  { name: "GFX08", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX08.bin" },
+  { name: "GFX09", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX09.bin" },
+  { name: "GFX0A", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX0A.bin" },
+  { name: "GFX0B", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX0B.bin" },
+  { name: "GFX0C", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX0C.bin" },
+  { name: "GFX0D", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX0D.bin" },
+  { name: "GFX0E", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX0E.bin" },
+  { name: "GFX0F", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX0F.bin" },
+  { name: "GFX10", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX10.bin" },
+  { name: "GFX11", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX11.bin" },
+  { name: "GFX12", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX12.bin" },
+  { name: "GFX13", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX13.bin" },
+  { name: "GFX14", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX14.bin" },
+  { name: "GFX15", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX15.bin" },
+  { name: "GFX16", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX16.bin" },
+  { name: "GFX17", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX17.bin" },
+  { name: "GFX18", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX18.bin" },
+  { name: "GFX19", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX19.bin" },
+  { name: "GFX1A", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX1A.bin" },
+  { name: "GFX1B", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX1B.bin" },
+  { name: "GFX1C", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX1C.bin" },
+  { name: "GFX1D", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX1D.bin" },
+  { name: "GFX1E", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX1E.bin" },
+  { name: "GFX1F", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX1F.bin" },
+  { name: "GFX20", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX20.bin" },
+  { name: "GFX21", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX21.bin" },
+  { name: "GFX22", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX22.bin" },
+  { name: "GFX23", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX23.bin" },
+  { name: "GFX24", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX24.bin" },
+  { name: "GFX25", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX25.bin" },
+  { name: "GFX26", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX26.bin" },
+  { name: "GFX27", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX27.bin" },
+  { name: "GFX28", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX28.bin" },
+  { name: "GFX29", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX29.bin" },
+  { name: "GFX2A", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX2A.bin" },
+  { name: "GFX2B", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX2B.bin" },
+  { name: "GFX2C", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX2C.bin" },
+  { name: "GFX2D", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX2D.bin" },
+  { name: "GFX2E", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX2E.bin" },
+  { name: "GFX2F", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX2F.bin" },
+  { name: "GFX30", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX30.bin" },
+  { name: "GFX31", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX31.bin" },
+  { name: "GFX32", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX32.bin" },
+  { name: "GFX33", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Graphics/GFX33.bin" },
 ];
 
 const palettePresets = [
-  { name: "Castle", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Palettes/Castle.pal" },
-  { name: "Cave", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Palettes/Cave.pal" },
-  { name: "Ghost House", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Palettes/GhostHouse.pal" },
-  { name: "Switch Palace", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Palettes/SwitchPalace.pal" },
-  { name: "Underwater", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Palettes/Underwater.pal" },
-  { name: "YoshiHouse", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Palettes/YoshiHouse.pal" },
-  { name: "Cave", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Palettes/Cave.pal" },
-  { name: "Cave", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/82476531ec17a79539609265ad2fb2454cea091f/Palettes/Cave.pal" },
+  { name: "Castle", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/68c1ca9d919b1a90eebc04198d66c204a7fbad8f/Palettes/Castle.pal" },
+  { name: "Cave", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/68c1ca9d919b1a90eebc04198d66c204a7fbad8f/Palettes/Cave.pal" },
+  { name: "Ghost House", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/68c1ca9d919b1a90eebc04198d66c204a7fbad8f/Palettes/GhostHouse.pal" },
+  { name: "Switch Palace", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/68c1ca9d919b1a90eebc04198d66c204a7fbad8f/Palettes/SwitchPalace.pal" },
+  { name: "Underwater", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/21f55edb040fc0ff07849ae0357cf7abe4d7506f/Palettes/Underwater.pal" },
+  { name: "Yoshi's House", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/68c1ca9d919b1a90eebc04198d66c204a7fbad8f/Palettes/YoshiHouse.pal" },
 ];
 
 const gfxSelect = document.getElementById("gfxPreset");
@@ -81,7 +126,10 @@ function initPresets() {
   });
 }
 
+let currentGFXName = "";
+
 function loadGFXPreset(preset) {
+  currentGFXName = preset.name;
   fetch(preset.path)
     .then(res => {
       if (!res.ok) {
@@ -93,13 +141,29 @@ function loadGFXPreset(preset) {
       const data = new Uint8Array(buffer);
       console.log('GFX Data:', data); // Log the data fetched from the .bin file
       gfxData = data;  // Store the graphics data
-      drawTiles(gfxData, currentPalette); // Draw the tiles after loading the gfx
+
+      // After loading the new GFX, we need to make sure we apply the selected palette
+      updatePaletteGroup(); // Apply the current palette and offset immediately
+      redrawGraphics(newPalette);  // Redraw the graphics with the correct palette and offset
     })
     .catch(error => {
       console.error('Error loading GFX:', error);
     });
+  
+  document.getElementById("tileInfo").style.display = "none";
+
+  // Reset the description
+  document.getElementById("tileInfo").textContent = "";
+  
+  // Clear zoom state and canvas
+  currentZoomX = null;
+  currentZoomY = null;
+  zoomCtx.clearRect(0, 0, zoomCanvas.width, zoomCanvas.height);
+  zoomCtx.fillStyle = '#444'; // or any background
+  zoomCtx.fillRect(0, 0, zoomCanvas.width, zoomCanvas.height);
 }
 
+//Load selected palette
 function loadPalettePreset(preset) {
   fetch(preset.path)
     .then(res => {
@@ -126,13 +190,13 @@ function loadPalettePreset(preset) {
       }
 
       updatePaletteGroup();  // Update the palette after it's loaded
-      redrawGraphics(currentPalette);  // Redraw all the graphics using the updated palette
     })
     .catch(error => {
       console.error('Error loading Palette:', error);
     });
 }
 
+//Update palette after switching
 function updatePaletteGroup() {
   const offset = currentPaletteOffset * 16;  // Calculate the starting index based on offset
   const newPalette = currentPalette.slice(offset, offset + 16);  // Slice the palette to show the correct colors
@@ -141,6 +205,10 @@ function updatePaletteGroup() {
 
   renderPalette(newPalette);
   redrawGraphics(newPalette);  // Pass newPalette to redrawGraphics
+
+  if (currentZoomX !== null && currentZoomY !== null) {
+    drawZoomBlock(currentZoomX, currentZoomY);
+  }
 }
 
 // Render the palette in the HTML
@@ -170,6 +238,36 @@ function redrawGraphics(newPalette) {
   }
 }
 
+// Update drawGrid to ensure correct grid size (16x8)
+function drawGrid(ctx, tileWidth = 0, tileHeight = 8, color = 'rgba(255, 255, 255, 0.75)') {
+  const width = ctx.canvas.width;
+  const height = ctx.canvas.height;
+
+  ctx.clearRect(0, 0, width, height); // Clear the grid before redrawing
+
+  ctx.save();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 1;
+
+  // Vertical lines for 16 tiles horizontally
+  for (let x = 0; x <= width; x += tileWidth) {
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, height);
+    ctx.stroke();
+  }
+
+  // Horizontal lines for 8 tiles vertically (adjust this part)
+  for (let y = 0; y <= height; y += tileHeight) {
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(width, y);
+    ctx.stroke();
+  }
+
+  ctx.restore();
+}
+
 // Draw Graphics
 function drawTiles(data, newPalette) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -180,8 +278,12 @@ function drawTiles(data, newPalette) {
     const tileY = Math.floor(t / TILES_PER_ROW) * TILE_SIZE * SCALE;
     drawTile(data.slice(t * TILE_BYTES, (t + 1) * TILE_BYTES), tileX, tileY, newPalette);  // Pass newPalette
   }
+
+  // Draw the grid after all tiles have been drawn
+  drawGrid(gridCtx, TILE_SIZE * SCALE, TILE_SIZE * SCALE);
 }
 
+//Draw GFX
 function drawTile(tileBytes, x, y, newPalette) {
   for (let row = 0; row < 8; row++) {
     const plane0 = tileBytes[row * 2];
@@ -203,4 +305,61 @@ function drawTile(tileBytes, x, y, newPalette) {
   }
 }
 
-initPresets();
+//Zoom
+let currentZoomX = null;
+let currentZoomY = null;
+const clickCanvas = document.getElementById('clickCanvas');
+const zoomCanvas = document.getElementById('zoomCanvas');
+const zoomCtx = zoomCanvas.getContext('2d');
+
+const blockSize = 32;     // The size of the block to zoom (in pixels)
+const zoomScale = 8;      // How much to zoom
+
+clickCanvas.addEventListener('click', function (e) {
+  const rect = clickCanvas.getBoundingClientRect();
+  const scaleX = clickCanvas.width / rect.width;
+  const scaleY = clickCanvas.height / rect.height;
+  const x = Math.floor((e.clientX - rect.left) * scaleX);
+  const y = Math.floor((e.clientY - rect.top) * scaleY);
+
+  // Snap to top-left of nearest 32x32 tile
+  const tileX = Math.floor(x / 32) * 32;
+  const tileY = Math.floor(y / 32) * 32;
+
+  // Store current zoom position
+  currentZoomX = tileX;
+  currentZoomY = tileY;
+  drawZoomBlock(tileX, tileY); // Replace this with your zoom logic
+
+  //descriptions
+  const key = `${tileX}_${tileY}`;
+  const gfxData = tileDescriptionsByGFX[currentGFXName];
+  
+  if (gfxData && gfxData[key]) {
+    const description = gfxData[key];
+    document.getElementById("tileInfo").style.display = "block";
+    document.getElementById("tileInfo").innerHTML = `
+      <strong>Usage:</strong> ${description.usage}<br>
+      <strong>Palette:</strong> ${description.palette}<br>
+      <strong>Type:</strong> ${description.type}
+    `;
+  } else {
+    document.getElementById("tileInfo").style.display = "block";
+    document.getElementById("tileInfo").textContent = "No description available.";
+  }
+});
+
+function drawZoomBlock(srcX, srcY) {
+  const destWidth = blockSize * zoomScale;
+  const destHeight = blockSize * zoomScale;
+  zoomCanvas.width = destWidth;
+  zoomCanvas.height = destHeight;
+
+  zoomCtx.imageSmoothingEnabled = false;
+  zoomCtx.clearRect(0, 0, destWidth, destHeight);
+  zoomCtx.drawImage(
+    tileCanvas,
+    srcX, srcY, blockSize, blockSize,
+    0, 0, destWidth, destHeight
+  );
+}
