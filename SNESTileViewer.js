@@ -232,7 +232,7 @@ function renderPalette(palette) {
 function redrawGraphics(newPalette) {
   if (gfxData) {
     console.log('Redrawing Tiles with Updated Palette...');
-    drawTiles(gfxData, newPalette);  // Pass newPalette to drawTiles
+    drawTiles(newPalette);  // Pass newPalette to drawTiles
   } else {
     console.log('No GFX Data available for redrawing.');
   }
@@ -268,23 +268,63 @@ function drawGrid(ctx, tileWidth = 0, tileHeight = 8, color = 'rgba(255, 255, 25
   ctx.restore();
 }
 
-// Draw Graphics
-function drawTiles(data, newPalette) {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  const tiles = Math.floor(data.length / TILE_BYTES);
+// Draw Graphics - switching palettes doesn't work
+function drawTiles(palette = currentPalette) {
+  const tileSize = currentMode === 1 ? 16 : currentMode === 2 ? 64 : 32;
+  const bytesPerTile = tileSize;
+  const totalTiles = Math.floor(gfxData.length / bytesPerTile);
 
-  for (let t = 0; t < tiles; t++) {
-    const tileX = (t % TILES_PER_ROW) * TILE_SIZE * SCALE;
-    const tileY = Math.floor(t / TILES_PER_ROW) * TILE_SIZE * SCALE;
-    drawTile(data.slice(t * TILE_BYTES, (t + 1) * TILE_BYTES), tileX, tileY, newPalette);  // Pass newPalette
+  const tilePixelSize = TILE_SIZE * SCALE;
+
+  // Dynamically calculate how many tiles per row fit in the canvas
+  const tilesPerRow = Math.floor(tileCanvas.width / tilePixelSize);
+  const rowsVisible = Math.floor(tileCanvas.height / tilePixelSize);
+  const maxVisibleTiles = tilesPerRow * rowsVisible;
+
+  ctx.clearRect(0, 0, tileCanvas.width, tileCanvas.height);
+
+  for (let i = 0; i < Math.min(totalTiles, maxVisibleTiles); i++) {
+    const tileOffset = i * bytesPerTile;
+    const tileBytes = gfxData.slice(tileOffset, tileOffset + bytesPerTile);
+
+    const x = (i % tilesPerRow) * tilePixelSize;
+    const y = Math.floor(i / tilesPerRow) * tilePixelSize;
+
+    if (currentMode === 1) {
+      draw2bppTile(tileBytes, x, y, palette);
+    } else if (currentMode === 2) {
+      drawMode7Tile(tileBytes, x, y);
+    } else {
+      draw4bppTile(tileBytes, x, y, palette);
+    }
   }
 
-  // Draw the grid after all tiles have been drawn
-  drawGrid(gridCtx, TILE_SIZE * SCALE, TILE_SIZE * SCALE);
+  drawGrid(gridCtx, tilePixelSize, tilePixelSize);
 }
 
-//Draw GFX
+// Mode Select setup
+const modeSelect = document.getElementById("modeSelect");
+let currentMode = parseInt(modeSelect.value, 10);
+modeSelect.addEventListener("change", () => {
+  currentMode = parseInt(modeSelect.value, 10);
+  if (gfxData && currentPalette.length > 0) {
+    updatePaletteGroup();
+  }
+});
+
+// Decode and draw logic
 function drawTile(tileBytes, x, y, newPalette) {
+  if (currentMode === 1) {
+    drawMode7Tile(tileBytes, x, y);
+  } else if (currentMode === 2) {
+    draw2bppTile(tileBytes, x, y, newPalette);
+  } else {
+    draw4bppTile(tileBytes, x, y, newPalette);
+  }
+}
+
+//works
+function draw4bppTile(tileBytes, x, y, newPalette) {
   for (let row = 0; row < 8; row++) {
     const plane0 = tileBytes[row * 2];
     const plane1 = tileBytes[row * 2 + 1];
@@ -298,8 +338,41 @@ function drawTile(tileBytes, x, y, newPalette) {
       const bit3 = (plane3 >> (7 - col)) & 1;
       const colorIndex = (bit3 << 3) | (bit2 << 2) | (bit1 << 1) | bit0;
 
-      const color = newPalette[colorIndex] || '#000000'; // Use the newPalette for colors
+      const color = newPalette[colorIndex] || '#000000';
       ctx.fillStyle = color;
+      ctx.fillRect(x + col * SCALE, y + row * SCALE, SCALE, SCALE);
+    }
+  }
+}
+
+//almost works
+function draw2bppTile(tileBytes, x, y, newPalette) {
+  for (let row = 0; row < 8; row++) {
+    const lo = tileBytes[row * 2];     // bitplane 0
+    const hi = tileBytes[row * 2 + 1]; // bitplane 1
+
+    for (let col = 0; col < 8; col++) {
+      const bit0 = (lo >> (7 - col)) & 1;
+      const bit1 = (hi >> (7 - col)) & 1;
+      const colorIndex = (bit1 << 1) | bit0;
+
+      const color = newPalette[colorIndex] || '#000000';
+      ctx.fillStyle = color;
+      ctx.fillRect(x + col * SCALE, y + row * SCALE, SCALE, SCALE);
+    }
+  }
+}
+
+//doesn't work yet
+function drawMode7Tile(tileBytes, x, y) {
+  // SNES Mode 7 is a bitmap-like 256x256 tilemap
+  for (let row = 0; row < 8; row++) {
+    for (let col = 0; col < 8; col++) {
+      const index = row * 8 + col;
+      const val = tileBytes[index] || 0;
+      const hex = val.toString(16).padStart(2, '0');
+      const gray = `#${hex}${hex}${hex}`;
+      ctx.fillStyle = gray;
       ctx.fillRect(x + col * SCALE, y + row * SCALE, SCALE, SCALE);
     }
   }
@@ -331,7 +404,7 @@ clickCanvas.addEventListener('click', function (e) {
   currentZoomY = tileY;
   drawZoomBlock(tileX, tileY); // Replace this with your zoom logic
 
-  //descriptions
+  //descriptions (apart of zoom)
   const key = `${tileX}_${tileY}`;
   const gfxData = tileDescriptionsByGFX[currentGFXName];
   
@@ -341,7 +414,8 @@ clickCanvas.addEventListener('click', function (e) {
     document.getElementById("tileInfo").innerHTML = `
       <strong>Usage:</strong> ${description.usage}<br>
       <strong>Palette:</strong> ${description.palette}<br>
-      <strong>Type:</strong> ${description.type}
+      <strong>Type:</strong> ${description.type}<br>
+      <strong>Mode:</strong> ${description.mode}
     `;
   } else {
     document.getElementById("tileInfo").style.display = "block";
