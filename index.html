@@ -13,7 +13,7 @@
     <P>Welcome! The purpose of this website is to help you recreate SMW graphics!</P>
     <P>Use the Graphics Wizard to begin!</P>
     <P><span class="Warning">Warning this site is constantly being updated with new GFX! it takes for me to create descriptions for everything! Also, I am not sure what some Graphics are used for inside the files so anything with a ? is something I don't know.</span></P>
-    <P><span class="Warning">GFX27-GFX2B is glitched graphics at the moment, I'm working on a feature to fix this for the future.</span></P>
+    <P><span class="Warning">GFX27/3BPP SNES MODE 7 integration, is glitched at the moment, I'm working on a feature to fix this for the future.</span></P>
     <p>Website created by: MVXgameS</p>
 
     <!-- GFX Wizard -->
@@ -53,8 +53,15 @@
         <option value="15">Palette F</option>
     </select>
 
-    <label>Set Type:</label>
+    <label>Choose Type:</label>
     <select id="palettePreset"></select>
+
+    <label>Choose Mode:</label>
+    <select id="modeSelect">
+        <option value="0">4BPP SNES</option>
+        <option value="2">3BPP SNES MODE 7</option>
+        <option value="1">2BPP GB</option>
+    </select>
 
     <!-- Descriptions -->
     <div id="tileInfo" style="margin-top: 10px; font-weight: bold;"></div>
