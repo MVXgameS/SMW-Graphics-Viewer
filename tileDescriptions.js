@@ -13,7 +13,8 @@ function createTileMap(coords, description) {
         {
           usage: "This GFX is used when loading a custom graphic that is not native to SMW.",
           palette: "Palette 8",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
     // Nintendo Presents
@@ -26,7 +27,8 @@ function createTileMap(coords, description) {
         {
           usage: "This GFX is used when first starting the game.",
           palette: "Any",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
     // Mario 8x8 Tiles
@@ -39,7 +41,8 @@ function createTileMap(coords, description) {
         {
           usage: "These GFXs are used when mario is performing actions such as swimming or running.",
           palette: "Palette 8",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
     // Feather Powerup
@@ -48,7 +51,8 @@ function createTileMap(coords, description) {
         {
           usage: "This GFX is the feather for the cape powerup used in SMW.",
           palette: "Palette A",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
     // Mushroom/1-up
@@ -57,7 +61,8 @@ function createTileMap(coords, description) {
         {
           usage: "This is the GFX for iconic Super Mario Mushroom Powerup! The only difference between this and the 1-up is the palette.",
           palette: "Palette C/Palette D",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
     // Fire Flower
@@ -66,7 +71,8 @@ function createTileMap(coords, description) {
         {
           usage: "This is the GFX for the Fire Flower Powerup.",
           palette: "Palette D",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
     // Springboard
@@ -75,7 +81,8 @@ function createTileMap(coords, description) {
         {
           usage: "This GFX is used for the Springboard, Frame 1/3.",
           palette: "Palette D",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
       ...createTileMap(
@@ -83,7 +90,8 @@ function createTileMap(coords, description) {
         {
           usage: "This GFX is used for the Springboard, Frame 2/3.",
           palette: "Palette D",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
       ...createTileMap(
@@ -91,7 +99,8 @@ function createTileMap(coords, description) {
         {
           usage: "This GFX is used for the Springboard, Frame 3/3.",
           palette: "Palette D",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
     // 1-up
@@ -100,7 +109,8 @@ function createTileMap(coords, description) {
         {
           usage: "This is the GFX is used for the 1-up. Use alternative palette to switch to Luigi's 1-up",
           palette: "Palette C/Palette D",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
     // 2-up
@@ -109,7 +119,8 @@ function createTileMap(coords, description) {
         {
           usage: "This is the GFX is used for the 2-up.",
           palette: "Palette A",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
     // 3-up
@@ -118,7 +129,8 @@ function createTileMap(coords, description) {
         {
           usage: "This is the GFX is used for the 3-up.",
           palette: "Palette B",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
     // 5-up
@@ -127,7 +139,8 @@ function createTileMap(coords, description) {
         {
           usage: "This is the GFX is used for the 5-up.",
           palette: "Palette B",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
     // Score Points
@@ -136,7 +149,8 @@ function createTileMap(coords, description) {
         {
           usage: "This is the GFX is used for the points collected by Mario.",
           palette: "Any",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
     // Flying ? Block
@@ -145,7 +159,8 @@ function createTileMap(coords, description) {
         {
           usage: "This GFX is for the Flying ? Block sprite, this is not the same as the normal ? Block Object.",
           palette: "Palette A",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
     // Fireball Extension Sprite
@@ -154,7 +169,8 @@ function createTileMap(coords, description) {
         {
           usage: "This GFX is for the fireballs thrown from the Fire Flower, Frame 1/2.",
           palette: "Palette A",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
     ...createTileMap(
@@ -162,7 +178,8 @@ function createTileMap(coords, description) {
         {
           usage: "This GFX is for the fireballs thrown from the Fire Flower, Frame 2/2.",
           palette: "Palette A",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
     // Block Destroyed Extension Sprites
@@ -171,7 +188,8 @@ function createTileMap(coords, description) {
         {
           usage: "This GFX is for when blocks are destroyed in SMW, Frame 1/2.",
           palette: "Palette 8",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
     ...createTileMap(
@@ -179,7 +197,8 @@ function createTileMap(coords, description) {
         {
           usage: "This GFX is for when blocks are destroyed in SMW, Frame 2/2.",
           palette: "Palette 8",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
     // Used ? Block / Snack Block
@@ -188,7 +207,8 @@ function createTileMap(coords, description) {
         {
           usage: "This GFX is used when a ? block has been flagged 'used'. Also is used for the snake block in SMW.",
           palette: "Palette 6",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
     // Throwable Block
@@ -197,7 +217,8 @@ function createTileMap(coords, description) {
         {
           usage: "This is the GFX is for the throwable block sprite.",
           palette: "Palette B",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
     // Throwable Block
@@ -206,7 +227,8 @@ function createTileMap(coords, description) {
         {
           usage: "This is the GFX is for the P-switch. Sometimes seen as palette 9 in Ghost Houses.",
           palette: "Palette 9/Palette B",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
     // Star Powerup
@@ -215,7 +237,8 @@ function createTileMap(coords, description) {
         {
           usage: "This is the GFX is for the Super Star Mario Power-up.",
           palette: "Palette A",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
     ...createTileMap(
@@ -223,7 +246,8 @@ function createTileMap(coords, description) {
         {
           usage: "This GFX is used for the sparkle that surrounds the player when Mario has the Star Power-up, Frame 1/4.",
           palette: "Palette B",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
     ...createTileMap(
@@ -231,7 +255,8 @@ function createTileMap(coords, description) {
         {
           usage: "This GFX is used for the sparkle that surrounds the player when Mario has the Star Power-up, Frame 2/4.",
           palette: "Palette B",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
     ...createTileMap(
@@ -239,7 +264,8 @@ function createTileMap(coords, description) {
         {
           usage: "This GFX is used for the sparkle that surrounds the player when Mario has the Star Power-up, Frame 3/4.",
           palette: "Palette B",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
     ...createTileMap(
@@ -247,7 +273,8 @@ function createTileMap(coords, description) {
         {
           usage: "This GFX is used for the sparkle that surrounds the player when Mario has the Star Power-up, Frame 4/4.",
           palette: "Palette B",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
     // Yoshi Wind Folded
@@ -256,7 +283,8 @@ function createTileMap(coords, description) {
         {
           usage: "This GFX is used for when Yoshi picks up the wings, Frame 1/2.",
           palette: "Palette B",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
     // Sliding Koopa
@@ -265,7 +293,8 @@ function createTileMap(coords, description) {
         {
           usage: "This GFX is used for the Sliding Koopa Sprite.",
           palette: "Palette B",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
     // Puff of Smoke - not done
@@ -274,7 +303,8 @@ function createTileMap(coords, description) {
         {
           usage: "This GFX is used for the cloud for whenever Mario completes an action. Ex: Jumping/Spinning on enemies.",
           palette: "Any",
-          type: "Any"
+          type: "Any",
+          mode: "4BPP SNES"
         }
       ),
     }
