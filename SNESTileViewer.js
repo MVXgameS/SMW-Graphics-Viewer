@@ -323,7 +323,6 @@ function drawTile(tileBytes, x, y, newPalette) {
   }
 }
 
-//works
 function draw4bppTile(tileBytes, x, y, newPalette) {
   for (let row = 0; row < 8; row++) {
     const plane0 = tileBytes[row * 2];
@@ -345,7 +344,6 @@ function draw4bppTile(tileBytes, x, y, newPalette) {
   }
 }
 
-//almost works
 function draw2bppTile(tileBytes, x, y, newPalette) {
   for (let row = 0; row < 8; row++) {
     const lo = tileBytes[row * 2];     // bitplane 0
