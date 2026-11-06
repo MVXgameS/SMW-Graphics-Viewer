@@ -70,6 +70,7 @@ const palettePresets = [
   { name: "Switch Palace", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/68c1ca9d919b1a90eebc04198d66c204a7fbad8f/Palettes/SwitchPalace.pal" },
   { name: "Underwater", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/21f55edb040fc0ff07849ae0357cf7abe4d7506f/Palettes/Underwater.pal" },
   { name: "Yoshi's House", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/68c1ca9d919b1a90eebc04198d66c204a7fbad8f/Palettes/YoshiHouse.pal" },
+  { name: "Super Slow Muncher", path: "https://raw.githubusercontent.com/MVXgameS/SMW-Graphics-Viewer/2be8cde89ada50535a0e59226b95882c173a9cd1/Palettes/Tired Mario World Super Slow Muncher.pal" }
 ];
 
 const gfxSelect = document.getElementById("gfxPreset");
